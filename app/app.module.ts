@@ -6,11 +6,21 @@ import { RecipeListComponent } from './recipe-list.component';
 import { RecipeDetailComponent } from './recipe-detail.component';
 import { RecipeEditComponent } from './recipe-edit.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
+
+import { masterFirebaseConfig } from './api-keys';
+
+export const firebaseConfig = {
+  apiKey: masterFirebaseConfig.apiKey,
+  authDomain: masterFirebaseConfig.authDomain,
+  databaseURL: masterFirebaseConfig.databaseURL,
+  storageBucket: masterFirebaseConfig.storageBucket
+}
 
 import { MdSelectModule } from '@angular/material';
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule, NoopAnimationsModule, MdSelectModule ],
+  imports: [ BrowserModule, FormsModule, NoopAnimationsModule, MdSelectModule, AngularFireModule.initializeApp(firebaseConfig) ],
   declarations: [ AppComponent, RecipeListComponent, RecipeDetailComponent, RecipeEditComponent ],
   bootstrap: [ AppComponent ]
 })

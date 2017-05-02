@@ -13,7 +13,7 @@ import { Recipe } from './recipe.model';
       </ul>
       <p>{{currentRecipe.directions}}</p>
       <div *ngIf="showEditForm">
-        <recipe-edit [recipeToEdit]="currentRecipe"></recipe-edit>
+        <recipe-edit [recipeToEdit]="currentRecipe" (editRecipeSender)="updateRecipe($event)"></recipe-edit>
       </div>
     </div>
     <div class="card-action">
@@ -27,8 +27,14 @@ import { Recipe } from './recipe.model';
 export class RecipeDetailComponent {
   @Input() currentRecipe: Recipe;
   @Output() recipeHideSender = new EventEmitter();
+  @Output() editRecipeSender = new EventEmitter();
 
   showEditForm = false;
+
+  updateRecipe(recipeToUpdate: Recipe) {
+    this.editFormToggle();
+    this.editRecipeSender.emit(recipeToUpdate);
+  }
 
   editFormToggle() {
     this.showEditForm = !(this.showEditForm)

@@ -1,0 +1,11 @@
+{
+  "recipes": [{
+    "title": "Sweet Ghost Pepper-Pineapple-Pear Hot Sauce",
+    "ingredients": ["3 cups pear, chopped", "1 cup pineapple, chopped", "2 ghost peppers, chopped", "¼ cup apple cider vinegar", "1 teaspoon honey", "1 tablespoon dried basil", "1 teaspoon mustard powder"],
+    "directions": "Add everything to a large pot and bring the liquids to a quick boil. Turn down the heat and simmer for 20 minutes, until the entire mixture breaks down. Transfer to a food processor or blender and process until smooth. Pour into sterilized containers."
+  }, {
+    "title": "Sambal Oelek",
+    "ingredients": ["1 pound red chili peppers", "2 tablespoons rice vinegar", "1 tablespoon salt", "2 garlic cloves", "1 teaspoon lime juice"],
+    "directions": "Add all of the ingredients to a food processor or other grinder. A Molcajete is a great option here. Grind until a course paste forms. Add to a jar and cover. Refrigerate until ready to use."
+  }]
+}

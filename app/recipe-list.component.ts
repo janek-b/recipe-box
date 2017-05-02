@@ -5,7 +5,7 @@ import { Recipe } from './recipe.model';
   selector: 'recipe-list',
   template: `
   <ul class="collection">
-    <a (click)="showDetails(recipe)" class="collection-item hoverable" *ngFor="let recipe of recipeList">{{recipe.title}}</a>
+    <a (click)="showDetails(recipe)" class="collection-item hoverable" *ngFor="let recipe of recipeList | async">{{recipe.title}}</a>
   </ul>
   `
 })

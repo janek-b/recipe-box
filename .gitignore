@@ -5,3 +5,5 @@ app/*.js
 app/*.js.map
 .DS_Store
 build/
+.env
+/app/api-keys.ts

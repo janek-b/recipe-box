@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Recipe } from './recipe.model';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ import { Recipe } from './recipe.model';
         <recipe-list [recipeList]="recipes" (clickSender)="showDetails($event)"></recipe-list>
       </div>
       <div class="col s6">
-        <recipe-detail [currentRecipe]="selectedRecipe" (recipeHideSender)="recipeHide()"></recipe-detail>
+        <recipe-detail [currentRecipe]="selectedRecipe" (recipeHideSender)="recipeHide()" (editRecipeSender)="updateRecipe($event)"></recipe-detail>
       </div>
     </div>
 
@@ -22,11 +23,12 @@ import { Recipe } from './recipe.model';
 })
 
 export class AppComponent {
+  recipes: FirebaseListObservable<any[]>;
+  constructor(af: AngularFire) {
+    this.recipes = af.database.list('/recipes');
+  }
   selectedRecipe = null;
-  recipes: Recipe[] = [
-    new Recipe('Sweet Ghost Pepper-Pineapple-Pear Hot Sauce', ['3 cups pear, chopped', '1 cup pineapple, chopped', '2 ghost peppers, chopped', '¼ cup apple cider vinegar', '1 teaspoon honey', '1 tablespoon dried basil', '1 teaspoon mustard powder'], 'Add everything to a large pot and bring the liquids to a quick boil. Turn down the heat and simmer for 20 minutes, until the entire mixture breaks down. Transfer to a food processor or blender and process until smooth. Pour into sterilized containers.'),
-    new Recipe('Sambal Oelek', ['1 pound red chili peppers', '2 tablespoons rice vinegar', '1 tablespoon salt', '2 garlic cloves', '1 teaspoon lime juice'], 'Add all of the ingredients to a food processor or other grinder. A Molcajete is a great option here. Grind until a course paste forms. Add to a jar and cover. Refrigerate until ready to use.')
-  ];
+
 
   showDetails(clickedRecipe: Recipe) {
     this.selectedRecipe = clickedRecipe;
@@ -34,6 +36,10 @@ export class AppComponent {
 
   recipeHide() {
     this.selectedRecipe = null;
+  }
+
+  updateRecipe(recipeToUpdate: any) {
+    this.recipes.update(recipeToUpdate.key, recipeToUpdate.recipe);
   }
 
 }

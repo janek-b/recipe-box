@@ -23,11 +23,17 @@ declare var jQuery: any;
       <textarea [(ngModel)]="recipeToEdit.directions" id="directions" class="materialize-textarea"></textarea>
       <label for="directions" class="active">Directions</label>
     </div>
+    <a (click)="updateRecipe(recipeToEdit.$key, recipeToEdit)" class="waves-effect waves-light btn">Submit</a>
   `
 })
 
 export class RecipeEditComponent {
   @Input() recipeToEdit: Recipe;
+  @Output() editRecipeSender = new EventEmitter();
+
+  updateRecipe(key: string, recipe: Recipe) {
+    this.editRecipeSender.emit({key: key, recipe: recipe});
+  }
 
   currentIngredient;
 
