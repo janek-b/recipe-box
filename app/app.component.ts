@@ -13,6 +13,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
     <div class="row">
       <div class="col s4 offset-s1">
         <recipe-list [recipeList]="recipes" (clickSender)="showDetails($event)"></recipe-list>
+        <recipe-new (newRecipeSender)="addRecipe($event)"></recipe-new>
       </div>
       <div class="col s6">
         <recipe-detail [currentRecipe]="selectedRecipe" (recipeHideSender)="recipeHide()" (editRecipeSender)="updateRecipe($event)"></recipe-detail>
@@ -40,6 +41,10 @@ export class AppComponent {
 
   updateRecipe(recipeToUpdate: any) {
     this.recipes.update(recipeToUpdate.key, recipeToUpdate.recipe);
+  }
+
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
   }
 
 }

@@ -6,19 +6,23 @@ import { Recipe } from './recipe.model';
   selector: 'recipe-detail',
   template: `
   <div *ngIf="currentRecipe" class="card blue-grey darken-1">
-    <div class="card-content white-text">
+    <div class="card-image">
+      <img [src]="currentRecipe.image">
       <span class="card-title">{{currentRecipe.title}}</span>
+    </div>
+    <div class="card-content white-text">
       <ul class="collection black-text">
         <li class="collection-item" *ngFor="let ingredient of currentRecipe.ingredients">{{ingredient}}</li>
       </ul>
       <p>{{currentRecipe.directions}}</p>
-      <div *ngIf="showEditForm">
-        <recipe-edit [recipeToEdit]="currentRecipe" (editRecipeSender)="updateRecipe($event)"></recipe-edit>
-      </div>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Edit Recipe<i class="material-icons right">close</i></span>
+      <recipe-edit [recipeToEdit]="currentRecipe" (editRecipeSender)="updateRecipe($event)"></recipe-edit>
     </div>
     <div class="card-action">
       <a (click)="recipeHide()" class="waves-effect waves-light btn left-align">Hide</a>
-      <a (click)="editFormToggle()" class="waves-effect waves-light btn right">Edit</a>
+      <a class="waves-effect waves-light btn right activator">Edit</a>
     </div>
   </div>
   `
@@ -43,4 +47,5 @@ export class RecipeDetailComponent {
   recipeHide() {
     this.recipeHideSender.emit();
   }
+
 }
